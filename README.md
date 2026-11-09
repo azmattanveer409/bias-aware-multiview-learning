@@ -26,7 +26,9 @@
 <!-- PROJECT BANNER: Upload your banner as images/project-banner.png -->
 
 
-![Project Banner](images/project-banner.png)
+![Project Banner]
+
+<img width="1340" height="1024" alt="Bias-Aware Multi-View README Infographic" src="https://github.com/user-attachments/assets/01d471d6-8790-4dc3-8bc4-c6de30361440" />
 
 
 
@@ -75,7 +77,9 @@ The experiments use the **CIFAR-10** dataset, a widely used benchmark for image 
 <!-- DATASET IMAGE: Upload as images/cifar10-samples.png -->
 
 
-![CIFAR-10 Dataset Samples](images/cifar10-samples.png)
+![CIFAR-10 Dataset Samples]<img width="1184" height="497" alt="download" src="https://github.com/user-attachments/assets/26ceeba0-b7b1-4cda-8a7e-05c9d93c09f9" />
+<img width="1036" height="800" alt="XoYbaOlVEQyjrvS5B0sIBKHPWXZEZle8mMSaJVxPlJDfbUDE_GzokKm7bRvyuWSSdPgpTGSOilWtDZOkfbIpL5WzVti4UMIlaQet7nMBH7Lv3WjQ4i52cVlmSPW-mRUNqtNO1TP7kKQEzbt0TkDUkE-WFqEzVg0x3hlLOeW_Ztxx92awajbySfwjb8T-h6EY" src="https://github.com/user-attachments/assets/cf2248eb-ae48-4328-b4c2-4d65f41eb96f" />
+
 
 
 
@@ -90,8 +94,7 @@ The framework combines three different visual feature representations to investi
 <!-- FEATURE EXTRACTION IMAGE: Upload as images/feature-views.png -->
 
 
-![Multi-View Feature Extraction](images/feature-views.png)
-
+![Multi-View Feature Extraction]<img width="800" height="400" alt="pz5MNSuqfbwqSsWsayLCbn50P4om7upPD_t-o-JvOcS-ACT8q0_aWuVUJIKjoGUc9NNRz5PxxgB9soGcEPmL1aHgIyDZ6Kci3_HggMkeZRqB-4g9eWusE8aRN3RCizYBa03b1hhbwp4chxQsFx4hz66dQ_fFhQ2AypEhvwQoL_EcRlfjrI_VcUyX3WnbM97P" src="https://github.com/user-attachments/assets/aeeb7739-3772-45b6-9705-f3d0b13dec1e" />
 
 
 ### 4.1 CNN Features
@@ -195,7 +198,9 @@ The experimental workflow consists of the following stages:
 <!-- METHODOLOGY FLOWCHART: Upload as images/methodology.png -->
 
 
-![Research Methodology](images/methodology.png)
+![Research Methodology]<img width="2361" height="2885" alt="AfJ-y-rJ8_L087dhHSEMbYqA5Xuh4XQoig-a_oFT5PflctLKJt0cvZdTt25wMo25ylyQ3EuoukOWgN16RHppJsjljQpwpPYKAa2oK5gY3njG6kRYlvXPzpdt_kxk4nfyvkp698e38m9G_87PaGrGOUTWaXFIzmFf4jywa6rI2aQckyrUabRjaJjFw478T8wU" src="https://github.com/user-attachments/assets/5ccc4e77-5058-4425-835d-ec6f7f9624aa" />
+
+
 
 
 
@@ -244,8 +249,7 @@ Additional experiments will investigate robustness across multiple random seeds 
 <!-- RESULTS IMAGE: Add your actual accuracy comparison chart here -->
 
 
-![Model Performance Comparison](images/results/model-comparison.png)
-
+![Model Performance Comparison]<img width="1200" height="957" alt="fhuUvETcwW8_0TcYJwiv3IeiWTheotXlABASU0e2Kz4I9zI7KivqqixHrwOBNpjIjmq6POQ6g02PQsvF-KbZEboM1N_o_sCI1e8FB6eU1Q6rZwkLqOWPnGGIqIyHnat11cS3yEiOnx87ISJCKygNclAZDE-J0rlPYCjVoIZMuuGjt8v1apRGg8okg8KC-lUs" src="https://github.com/user-attachments/assets/a7ed7d84-09fc-4a13-a57e-6a63380eb130" />
 
 
 *Figure: Comparative classification performance of the evaluated models.*
@@ -255,7 +259,7 @@ Additional experiments will investigate robustness across multiple random seeds 
 <!-- CONFUSION MATRIX: Add your actual confusion matrix here -->
 
 
-![Confusion Matrix](images/results/confusion-matrix.png)
+![Confusion Matrix]<img width="625" height="547" alt="download" src="https://github.com/user-attachments/assets/76915c78-a8cf-4e3e-bde1-5e0932c3f4d3" />
 
 
 
