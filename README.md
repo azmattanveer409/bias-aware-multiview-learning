@@ -1,283 +1,343 @@
-# Bias-Aware Multi-View Complementary Label Learning for Image Classification
+# <div align="center">
 
-
+# 🧠 Bias-Aware Multi-View Complementary Label Learning for Image Classification
 
 ![Python](https://img.shields.io/badge/Python-3.x-blue)
-
-
-
-
 ![PyTorch](https://img.shields.io/badge/Framework-PyTorch-red)
-
-
-
-
+![Scikit-learn](https://img.shields.io/badge/ML-Scikit--learn-orange)
 ![Dataset](https://img.shields.io/badge/Dataset-CIFAR--10-green)
+![Status](https://img.shields.io/badge/Status-Initial%20Results%20Available-yellow)
+![Type](https://img.shields.io/badge/Type-Independent%20Research%20Project-lightgrey)
 
+An experimental framework for image classification under **biased complementary-label supervision**, combining CNN features, Histogram of Oriented Gradients (HOG) and RGB colour histograms.
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/azmattanveer409/bias-aware-multiview-learning/blob/main/notebooks/Bias_Aware_Multi_View_Learning.ipynb)
 
-
-![Status](https://img.shields.io/badge/Status-Research%20in%20Progress-orange)
-
-
-
----
-
-<!-- PROJECT BANNER: Upload your banner as images/project-banner.png -->
-
-
-![Project Banner]
-
-<img width="1340" height="1024" alt="Bias-Aware Multi-View README Infographic" src="https://github.com/user-attachments/assets/01d471d6-8790-4dc3-8bc4-c6de30361440" />
-
-
+</div>
 
 ---
 
-## 1. Overview
+<!-- PROJECT BANNER -->
+<p align="center">
+  <img width="1340" height="1024" alt="Bias-Aware Multi-View README Infographic" src="https://github.com/user-attachments/assets/01d471d6-8790-4dc3-8bc4-c6de30361440" />
+</p>
+
+---
+
+## 📌 1. Overview
 
 This project investigates **bias-aware complementary-label learning** for image classification through multiple visual feature representations.
 
-In conventional supervised learning, each training image is associated with its correct class label. **Complementary-label learning** instead provides information indicating that an image does *not* belong to a particular class.
+In conventional supervised learning, each training image is associated with its correct class label. **Complementary-label learning** instead provides information indicating that an image does *not* belong to a particular class (for example, "this image is not a truck").
 
-The project investigates how non-uniform complementary-label distributions influence learning and examines the role of a bias-aware probabilistic objective.
+The project studies how a **non-uniform (biased)** complementary-label distribution influences learning, and compares a **naive** objective, a **bias-aware** objective that uses a transition matrix, and a **supervised reference** model. Each image is described through three views: learned CNN features, HOG descriptors and RGB colour histograms.
 
-The proposed experimental framework combines deep learning and handcrafted visual representations to investigate the potential benefits of multi-view learning.
-
----
-
-## 2. Research Objectives
-
-The primary objectives of this project are:
-
-1. Implement complementary-label learning for image classification.
-2. Investigate the effect of biased complementary-label distributions.
-3. Implement a transition-matrix-aware learning objective.
-4. Combine handcrafted and deep visual feature representations.
-5. Compare multi-view and single-view learning configurations.
-6. Evaluate classification performance using standard evaluation metrics.
+> **Scope:** this is an independent academic experiment on a controlled synthetic setting. It is **not** a peer-reviewed publication and **not** a claim of a novel algorithm.
 
 ---
 
-## 3. Dataset
+## 🎯 2. Research Objectives
+
+1. Implement complementary-label learning for CIFAR-10 image classification.
+2. Simulate biased complementary labels through a predefined transition matrix.
+3. Implement naive and bias-aware (transition-matrix-aware) learning objectives.
+4. Combine handcrafted (HOG, colour) and deep (CNN) visual representations.
+5. Compare multi-view learning with single-view configurations.
+6. Evaluate performance with accuracy, macro precision, macro recall, macro F1-score and confusion matrices.
+
+---
+
+## 🗂️ 3. Dataset
 
 ### CIFAR-10
 
-The experiments use the **CIFAR-10** dataset, a widely used benchmark for image classification.
+The experiments use **CIFAR-10**, a widely used image-classification benchmark.
 
-**Dataset characteristics:**
+| Property | Value |
+|---|---|
+| Total images | 60,000 |
+| Original training set | 50,000 |
+| Test set | 10,000 |
+| Classes | 10 |
+| Image size | 32 × 32 pixels, RGB |
 
-- **Total images:** 60,000
-- **Training images:** 50,000
-- **Test images:** 10,000
-- **Number of classes:** 10
-- **Image dimensions:** 32 × 32 pixels
-- **Colour channels:** RGB
+**Splits used in the experiment:** the 50,000 training images are divided into a **45,000-image training subset** and a **5,000-image validation subset**. The **10,000-image test set** is used for the reported results.
 
-<!-- DATASET IMAGE: Upload as images/cifar10-samples.png -->
+<p align="center">
+  <img width="1184" height="497" alt="CIFAR-10 sample images" src="https://github.com/user-attachments/assets/26ceeba0-b7b1-4cda-8a7e-05c9d93c09f9" />
+</p>
 
+<p align="center">
+  <img width="1036" height="800" alt="Additional dataset visualisation" src="https://github.com/user-attachments/assets/cf2248eb-ae48-4328-b4c2-4d65f41eb96f" />
+</p>
 
-![CIFAR-10 Dataset Samples]<img width="1184" height="497" alt="download" src="https://github.com/user-attachments/assets/26ceeba0-b7b1-4cda-8a7e-05c9d93c09f9" />
-<img width="1036" height="800" alt="XoYbaOlVEQyjrvS5B0sIBKHPWXZEZle8mMSaJVxPlJDfbUDE_GzokKm7bRvyuWSSdPgpTGSOilWtDZOkfbIpL5WzVti4UMIlaQet7nMBH7Lv3WjQ4i52cVlmSPW-mRUNqtNO1TP7kKQEzbt0TkDUkE-WFqEzVg0x3hlLOeW_Ztxx92awajbySfwjb8T-h6EY" src="https://github.com/user-attachments/assets/cf2248eb-ae48-4328-b4c2-4d65f41eb96f" />
-
-
-
-
-The dataset is downloaded through the `torchvision.datasets.CIFAR10` interface.
+The dataset is downloaded automatically through `torchvision.datasets.CIFAR10`.
 
 ---
 
-## 4. Multi-View Feature Representations
+## 🧩 4. Multi-View Feature Representations
 
-The framework combines three different visual feature representations to investigate the contribution of complementary information.
+Three different representations of each image are used to investigate the contribution of complementary information.
 
-<!-- FEATURE EXTRACTION IMAGE: Upload as images/feature-views.png -->
+<p align="center">
+  <img width="800" height="400" alt="Multi-view feature extraction" src="https://github.com/user-attachments/assets/aeeb7739-3772-45b6-9705-f3d0b13dec1e" />
+</p>
 
+| View | Representation | Captures |
+|---|---|---|
+| **CNN** | Learned visual features | Visual patterns and spatial structure |
+| **HOG** | 1,764-dimensional descriptor | Local edge orientation, shape |
+| **RGB histogram** | 48-dimensional descriptor | Colour distribution (16 bins × 3 channels) |
 
-![Multi-View Feature Extraction]<img width="800" height="400" alt="pz5MNSuqfbwqSsWsayLCbn50P4om7upPD_t-o-JvOcS-ACT8q0_aWuVUJIKjoGUc9NNRz5PxxgB9soGcEPmL1aHgIyDZ6Kci3_HggMkeZRqB-4g9eWusE8aRN3RCizYBa03b1hhbwp4chxQsFx4hz66dQ_fFhQ2AypEhvwQoL_EcRlfjrI_VcUyX3WnbM97P" src="https://github.com/user-attachments/assets/aeeb7739-3772-45b6-9705-f3d0b13dec1e" />
-
-
-### 4.1 CNN Features
-
-A **Convolutional Neural Network (CNN)** learns visual representations directly from image data.
-
-The CNN branch extracts learned features that capture visual patterns and spatial information.
+### 4.1 CNN features
+A **Convolutional Neural Network** learns visual representations directly from the image pixels.
 
 ### 4.2 Histogram of Oriented Gradients (HOG)
+A handcrafted descriptor that summarises local gradient and edge-orientation information, giving a representation of image structure and shape.
 
-**Histogram of Oriented Gradients (HOG)** is a handcrafted feature extraction technique that captures local gradient and edge-orientation information.
+### 4.3 RGB colour histograms
+The distribution of pixel intensities in the Red, Green and Blue channels, giving information about colour content but not shape.
 
-It provides a representation of image structure and shape characteristics.
-
-### 4.3 RGB Colour Histograms
-
-**RGB colour histograms** represent the distribution of pixel intensities across the three colour channels:
-
-- Red
-- Green
-- Blue
-
-They provide information about the colour distribution of an image.
-
-### 4.4 Multi-View Feature Fusion
-
-The three feature representations are combined through **feature concatenation (early fusion)** to construct a joint representation.
-
-This provides a baseline for investigating the contribution of different visual feature views.
+### 4.4 Multi-view fusion
+The three representations are combined by **feature concatenation (early fusion)** into one joint representation. This is a simple baseline for studying the contribution of each view, not a specialised multi-view learning method.
 
 ---
 
-## 5. Complementary-Label Generation
+## 🏷️ 5. Complementary-Label Generation
 
-Complementary labels are synthetically generated using a predefined **transition matrix**.
-
-The transition matrix is defined as:
+Complementary labels are **generated synthetically** from the true CIFAR-10 labels using a predefined **transition matrix** $T$:
 
 $$
 T_{y,c} = P(\bar{Y} = c \mid Y = y)
 $$
 
-Where:
+where
 
-- $Y$ represents the true class.
-- $\bar{Y}$ represents the complementary class.
-- $T_{y,c}$ represents the probability of assigning complementary class $c$ to an image belonging to true class $y$.
+- $Y$ is the true class,
+- $\bar{Y}$ is the complementary class (a class the image does *not* belong to),
+- $T_{y,c}$ is the probability that an image of true class $y$ receives complementary label $c$.
 
-The transition matrix assigns zero probability to the true class and distributes the remaining probability across incorrect classes.
+The matrix assigns **zero probability to the true class** and distributes the remaining probability over incorrect classes.
 
-Different bias strengths can be investigated to evaluate the effect of non-uniform complementary-label distributions.
+**Bias setting:** the experiment uses a **bias strength of 0.75**. For each true class, one selected incorrect class receives a higher probability of being assigned as the complementary label, so the labels are systematically non-uniform. The exact construction of the matrix is defined in the notebook.
 
-> **Important experimental consideration:** The transition matrix is predefined and known in the current controlled simulation. The experiment therefore evaluates learning under *known synthetic bias* rather than estimating an unknown real-world transition matrix.
-
----
-
-## 6. Learning Objectives
-
-The project investigates two complementary-label learning objectives.
-
-### 6.1 Naive Complementary-Label Learning
-
-The naive objective penalises the predicted probability assigned to the observed complementary class.
-
-Its mathematical formulation is:
-
-$$
-\mathcal{L}_{naive} = -\log\left(1 - p(c \mid x)\right)
-$$
-
-Where:
-
-- $x$ represents an input image.
-- $c$ represents its observed complementary class.
-- $p(c \mid x)$ represents the model's predicted probability for class $c$.
-
-### 6.2 Bias-Aware Complementary-Label Learning
-
-The bias-aware objective incorporates the predefined transition matrix to model the probability of observing a complementary class.
-
-The complementary-label probability is:
-
-$$
-P(\bar{Y} = c \mid x) = \sum_y T_{y,c} \, P(Y = y \mid x)
-$$
-
-The corresponding learning objective is:
-
-$$
-\mathcal{L}_{bias} = -\log P(\bar{Y} = c \mid x)
-$$
-
-This objective accounts for the specified complementary-label generation distribution.
+> **Important:** the transition matrix is predefined and **known** to the bias-aware model. The experiment therefore evaluates learning under *known synthetic bias*. It does **not** show that an unknown real-world transition matrix can be estimated.
 
 ---
 
-## 7. Experimental Methodology
+## 📐 6. Learning Objectives
 
-The experimental workflow consists of the following stages:
+### 6.1 Naive complementary-label learning
 
-<!-- METHODOLOGY FLOWCHART: Upload as images/methodology.png -->
+The naive objective penalises the probability the model assigns to the observed complementary class:
 
+$$
+\mathcal{L}_{\mathrm{naive}} = -\log\left(1 - p(c \mid x)\right)
+$$
 
-![Research Methodology]<img width="2361" height="2885" alt="AfJ-y-rJ8_L087dhHSEMbYqA5Xuh4XQoig-a_oFT5PflctLKJt0cvZdTt25wMo25ylyQ3EuoukOWgN16RHppJsjljQpwpPYKAa2oK5gY3njG6kRYlvXPzpdt_kxk4nfyvkp698e38m9G_87PaGrGOUTWaXFIzmFf4jywa6rI2aQckyrUabRjaJjFw478T8wU" src="https://github.com/user-attachments/assets/5ccc4e77-5058-4425-835d-ec6f7f9624aa" />
+- $x$: input image
+- $c$: observed complementary class
+- $p(c \mid x)$: predicted probability of class $c$
 
+This corresponds to assuming that annotators choose wrong classes **uniformly**.
 
+### 6.2 Bias-aware complementary-label learning
 
+The bias-aware objective uses the transition matrix to model the probability of observing a complementary label:
 
+$$
+P(\bar{Y} = c \mid x) = \sum_{y} T_{y,c} \cdot P(Y = y \mid x)
+$$
 
-1. **Dataset acquisition:** Download and prepare CIFAR-10.
-2. **Feature extraction:** Extract CNN, HOG and RGB colour features.
-3. **Complementary-label generation:** Generate complementary labels using a predefined transition matrix.
-4. **Model development:** Implement naive and bias-aware learning objectives.
-5. **Multi-view learning:** Combine different visual feature representations.
-6. **Model training:** Train the models using the selected learning objectives.
-7. **Evaluation:** Compare model performance using standard metrics.
-8. **Robustness analysis:** Investigate performance under different random seeds and bias strengths.
+$$
+\mathcal{L}_{\mathrm{bias}} = -\log P(\bar{Y} = c \mid x)
+$$
 
----
+This objective accounts for the specified label-generation distribution. It follows the general idea of forward correction with a transition matrix (see References).
 
-## 8. Experimental Comparisons
+### 6.3 Supervised reference
 
-The experimental framework includes the following configurations:
-
-| Model | Description |
-|---|---|
-| **Supervised Multi-View** | Reference model trained using true class labels |
-| **Naive Complementary Multi-View** | Multi-view model using the naive complementary-label objective |
-| **Bias-Aware Multi-View** | Main experimental model using the bias-aware objective |
-| **Bias-Aware CNN-Only** | Uses CNN features |
-| **Bias-Aware HOG-Only** | Uses HOG features |
-| **Bias-Aware Colour-Only** | Uses RGB colour features |
-
-The comparisons are intended to investigate the contribution of bias-aware learning and different feature representations.
+The supervised multi-view model is trained with standard cross-entropy on the **true** labels. It is a **reference**, not a directly equivalent complementary-label method, because it uses more informative supervision.
 
 ---
 
-## 9. Evaluation Metrics
+## 🔬 7. Experimental Methodology
 
-Model performance is evaluated using the following metrics:
+<p align="center">
+  <img width="700" alt="Research methodology flowchart" src="https://github.com/user-attachments/assets/5ccc4e77-5058-4425-835d-ec6f7f9624aa" />
+</p>
 
-- **Classification Accuracy:** Measures the proportion of correctly classified images.
-- **Precision:** Measures the correctness of positive predictions.
-- **Recall:** Measures the proportion of actual class instances correctly identified.
-- **Macro F1-Score:** Evaluates the balance between precision and recall across classes.
-- **Confusion Matrix:** Provides a class-wise comparison of actual and predicted labels.
-
-Additional experiments will investigate robustness across multiple random seeds and complementary-label bias strengths.
-
-### 9.1 Model Performance Comparison
-
-<!-- RESULTS IMAGE: Add your actual accuracy comparison chart here -->
-
-
-![Model Performance Comparison]<img width="1200" height="957" alt="fhuUvETcwW8_0TcYJwiv3IeiWTheotXlABASU0e2Kz4I9zI7KivqqixHrwOBNpjIjmq6POQ6g02PQsvF-KbZEboM1N_o_sCI1e8FB6eU1Q6rZwkLqOWPnGGIqIyHnat11cS3yEiOnx87ISJCKygNclAZDE-J0rlPYCjVoIZMuuGjt8v1apRGg8okg8KC-lUs" src="https://github.com/user-attachments/assets/a7ed7d84-09fc-4a13-a57e-6a63380eb130" />
-
-
-*Figure: Comparative classification performance of the evaluated models.*
-
-### 9.2 Confusion Matrix
-
-<!-- CONFUSION MATRIX: Add your actual confusion matrix here -->
-
-
-![Confusion Matrix]<img width="625" height="547" alt="download" src="https://github.com/user-attachments/assets/76915c78-a8cf-4e3e-bde1-5e0932c3f4d3" />
-
-
-
-*Figure: Confusion matrix of the selected model on the test dataset.*
-
-> **Note:** These figures will be added after the corresponding experiments have been completed and their results verified.
+1. **Dataset acquisition:** download and prepare CIFAR-10.
+2. **Feature extraction:** extract CNN, HOG and RGB colour representations.
+3. **Complementary-label generation:** generate labels with the predefined biased transition matrix (bias strength 0.75).
+4. **Model development:** implement the naive and bias-aware objectives.
+5. **Multi-view learning:** concatenate the view representations (early fusion).
+6. **Training:** train the models for **5 epochs** (single recorded configuration).
+7. **Evaluation:** compare models on the 10,000-image test set.
+8. **Robustness analysis (planned):** repeat over random seeds and several bias strengths.
 
 ---
 
-## 10. Technologies and Tools
+## 🧪 8. Experimental Comparisons
 
-The project uses the following technologies:
+| Model | Views | Labels / objective |
+|---|---|---|
+| **Supervised Multi-View** | CNN + HOG + colour | True labels (reference) |
+| **Naive Multi-View** | CNN + HOG + colour | Complementary, naive objective |
+| **Bias-Aware Multi-View** | CNN + HOG + colour | Complementary, bias-aware objective |
+| **Bias-Aware CNN-Only** | CNN | Complementary, bias-aware objective |
+| **Bias-Aware HOG-Only** | HOG | Complementary, bias-aware objective |
+| **Bias-Aware Colour-Only** | RGB histogram | Complementary, bias-aware objective |
+
+---
+
+## 📊 9. Results
+
+Test-set results from the notebook (**one configuration, 5 epochs, bias strength 0.75**):
+
+| Model | Test Accuracy | Macro F1 |
+|---|---:|---:|
+| Supervised Multi-View *(reference, true labels)* | 68.10% | 0.6706 |
+| **Bias-Aware Multi-View** | **65.45%** | **0.6563** |
+| Bias-Aware HOG-Only | 57.05% | 0.5675 |
+| Bias-Aware CNN-Only | 55.88% | 0.5561 |
+| Bias-Aware Colour-Only | 34.07% | 0.3337 |
+| Naive Multi-View | 20.95% | 0.1445 |
+
+### 9.1 Model performance comparison
+
+<p align="center">
+  <img width="1200" height="957" alt="Model performance comparison" src="https://github.com/user-attachments/assets/a7ed7d84-09fc-4a13-a57e-6a63380eb130" />
+</p>
+
+*Figure: Test accuracy of the evaluated models.*
+
+### 9.2 Confusion matrix
+
+<p align="center">
+  <img width="625" height="547" alt="Confusion matrix" src="https://github.com/user-attachments/assets/76915c78-a8cf-4e3e-bde1-5e0932c3f4d3" />
+</p>
+
+*Figure: Confusion matrix of the selected model on the test set.*
+
+### 9.3 Observations
+
+- The bias-aware multi-view model reached **65.45%** accuracy, **2.65 percentage points below** the supervised reference (68.10%).
+- It was **8.40 points above** the best single-view model (HOG-only, 57.05%) and **9.57 points above** the CNN-only model (55.88%), which suggests that combining views helped in this setting.
+- The **naive** multi-view model reached only **20.95%**, far below the bias-aware model. This is consistent with the naive objective's uniform-annotator assumption being violated by the biased labels.
+- Colour alone was the weakest bias-aware single view (34.07%), as expected for a descriptor that ignores shape.
+
+### 9.4 How to read these results
+
+- They come from **one run and one bias strength**; no variance across random seeds is reported yet, and no significance test was performed.
+- Training lasted **only 5 epochs**, so the CNN branch is likely under-trained; the ranking of CNN-only versus HOG-only should **not** be read as CNN being inferior.
+- Labels are **synthetic** and the transition matrix is **known** to the bias-aware model.
+- The supervised model uses true labels and is shown only as a reference.
+
+> These are initial results. Robustness across seeds and bias strengths is still to be evaluated.
+
+---
+
+## 🛠️ 10. Technologies and Tools
 
 | Technology | Application |
 |---|---|
 | **Python** | Programming language |
-| **PyTorch** | Deep learning and neural networks |
+| **PyTorch** | Neural networks and training |
 | **NumPy** | Numerical computing |
+| **Pandas** | Data handling and result tables |
+| **Scikit-learn** | Metrics and evaluation |
+| **Scikit-image** | HOG feature extraction |
+| **Matplotlib** | Visualisation |
+| **Google Colab** | Development and experimentation |
+
+---
+
+## 📁 11. Repository Structure
+
+```text
+bias-aware-multiview-learning/
+│
+├── README.md
+├── requirements.txt
+├── .gitignore
+│
+├── notebooks/
+│   └── Bias_Aware_Multi_View_Learning.ipynb
+│
+├── results/
+│   ├── model_comparison.csv
+│   └── figures/
+│
+├── src/                  # planned: code modules extracted from the notebook
+└── reports/              # planned: research report
+```
+
+---
+
+## ♻️ 12. Reproducibility
+
+1. Open the notebook in Google Colab (badge above) or run it locally.
+2. Install the requirements: `pip install -r requirements.txt`.
+3. Run all cells in order. CIFAR-10 is downloaded automatically.
+
+The notebook documents the dataset preparation, feature extraction, label generation, transition matrix, model architecture, training settings and evaluation. CIFAR-10 and large intermediate feature arrays are **not** stored in this repository.
+
+---
+
+## ⚠️ 13. Limitations
+
+1. **Synthetic complementary labels** generated from the true labels.
+2. **Known transition matrix:** the work does not estimate an unknown matrix from real data.
+3. **Single recorded configuration:** one bias strength (0.75), 5 training epochs, no repeated seeds.
+4. **Short training:** the CNN branch may be under-trained.
+5. **Fusion:** early fusion by concatenation is a simple baseline.
+6. **Dataset:** CIFAR-10 images are small and low-resolution; results should not be generalised to other datasets or real annotators.
+7. The supervised model uses true labels and is not directly comparable to the complementary-label models.
+
+---
+
+## 🚀 14. Future Work
+
+- [ ] Evaluate several bias strengths.
+- [ ] Repeat all experiments over multiple random seeds (mean ± standard deviation).
+- [ ] Test a misspecified transition matrix (assumed ≠ true bias).
+- [ ] Investigate estimating an unknown transition matrix.
+- [ ] Explore other fusion strategies.
+- [ ] Test other datasets and real human-annotated complementary labels.
+- [ ] Extract the notebook into reusable modules and write a short research report.
+
+---
+
+## 📚 15. Related Work and References
+
+The bias-aware objective follows the idea of learning with a transition matrix for complementary labels. This project is a small empirical study and does not claim to extend these works.
+
+- Ishida, T., Niu, G., Hu, W., Sugiyama, M. *Learning from Complementary Labels.* NeurIPS 2017.
+- Yu, X., Liu, T., Gong, M., Tao, D. *Learning with Biased Complementary Labels.* ECCV 2018.
+- Tang, L., Yan, Y., Tian, Y., Pardalos, P. M. *Self-adaptive label discovery and multi-view fusion for complementary label learning.* Neural Networks 181, 2025, 106763.
+- Tang, L., Liu, Y., Tian, Y., Pardalos, P. M. *Complementary label learning with multi-view data and a semi-supervised labeling mechanism.* Pattern Recognition 165, 2025, 111651.
+- Krizhevsky, A. *Learning Multiple Layers of Features from Tiny Images.* 2009 (CIFAR-10).
+
+---
+
+## 👤 16. Author
+
+**Azmat Tanveer**
+BS Mathematics, Abbottabad University of Science and Technology, Pakistan
+
+🔗 GitHub: [@azmattanveer409](https://github.com/azmattanveer409)
+
+---
+
+## 🔎 17. Research Areas
+
+`Artificial Intelligence` · `Machine Learning` · `Computer Vision` · `Image Processing` · `Image Classification` · `Multi-View Learning` · `Complementary Label Learning` · `Statistical Learning`
+
+---
+
+*This repository documents an academic experimental implementation. It is not presented as a peer-reviewed publication or a claim of a novel algorithm.*
+ical computing |
 | **Pandas** | Data processing |
 | **Scikit-learn** | Machine learning and evaluation |
 | **Scikit-image** | HOG feature extraction |
