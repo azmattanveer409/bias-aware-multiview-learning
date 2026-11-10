@@ -259,18 +259,17 @@ Test-set results from the notebook (**one configuration, 5 epochs, bias strength
 bias-aware-multiview-learning/
 │
 ├── README.md
+├── Bias_Aware_Multi_View_Learning.ipynb
 ├── requirements.txt
-├── .gitignore
 │
-├── notebooks/
-│   └── Bias_Aware_Multi_View_Learning.ipynb
+├── data/
+│ ├── X_COLOR.npy
+│ ├── X_HOG.npy
+│ └── Y_TRAIN.npy
 │
-├── results/
-│   ├── model_comparison.csv
-│   └── figures/
-│
-├── src/                  # planned: code modules extracted from the notebook
-└── reports/              # planned: research report
+└── results/
+    └── model_comparison.csv
+
 ```
 
 ---
